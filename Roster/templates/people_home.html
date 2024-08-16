@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<div class="row row-cols-1">
+    <div class="col-md-12">
+        <h2>Roster</h2>
+
+        <table id="main" class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in people %}
+                    <tr>
+                        <td>{{p.first_name}}</td>
+                        <td>{{p.last_name}}</td>
+                        <td>{{p.phone_number}}</td>
+                        <td>{{p.personal_email}}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row me-auto" id="new_user">
+    <div class="col-md-12 text-end">
+        <button
+         hx-trigger="click"
+         hx-swap="outerHTML"
+         hx-get="{{url_for('forms.new_user') }}" class="btn btn-primary btn-sm">Add</button>
+    </div>
+</div>
+
+
+
+{% endblock %}
