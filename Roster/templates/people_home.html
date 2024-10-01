@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load crispy_forms_tags %}
 
 
 <div class="row row-cols-1">
@@ -18,6 +18,7 @@
                 </tr>
             </thead>
             <tbody>
+                {% if people %}
                 {% for p in people %}
                     <tr>
                         <td>{{p.first_name}}</td>
@@ -27,18 +28,12 @@
                         <td></td>
                     </tr>
                 {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
 </div>
-<div class="row me-auto" id="new_user">
-    <div class="col-md-12 text-end">
-        <button
-         hx-trigger="click"
-         hx-swap="outerHTML"
-         hx-get="{{url_for('forms.new_user') }}" class="btn btn-primary btn-sm">Add</button>
-    </div>
-</div>
+
 
 
 
