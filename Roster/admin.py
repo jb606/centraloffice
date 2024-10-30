@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Person, Affiliation, Citizenship, EmergencyContact
+from . import models
+
 # Register your models here.
 
-admin.site.register(Person)
-admin.site.register(Affiliation)
-admin.site.register(Citizenship)
-admin.site.register(EmergencyContact)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('username', 'first_name', 'last_name',  )
+
+admin.site.register(models.Person, PersonAdmin)
+admin.site.register(models.Affiliation)

@@ -1,8 +1,0 @@
-<div class="row me-auto" id="new_user">
-    <div class="col-md-12 text-end">
-        <button
-         hx-trigger="click"
-         hx-swap="outerHTML"
-         hx-get="{{url_for('forms.new_user') }}" class="btn btn-primary btn-sm">Add</button>
-    </div>
-</div>
