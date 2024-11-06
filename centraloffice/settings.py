@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 SITE_ID = 1
 INSTALLED_APPS = [
+    "Roster",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,7 +47,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "localflavor",
-    "Roster",
+    "django_tables2",
+    "django_filters",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
@@ -58,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "centraloffice.urls"
@@ -132,9 +136,9 @@ AUTHENTICATION_BACKENDS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'static'
+#STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = "static/"
-
+STATICFILES_DIRS = [ 'static',]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -153,7 +157,10 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-BOOTSTRAP5 = { "theme_url": "https://bootswatch.com/5/darkly/bootstrap.min.css" }
+#BOOTSTRAP5 = { "theme_url": "https://bootswatch.com/5/darkly/bootstrap.min.css" }
 AUTH_USER_MODEL = 'Roster.Person'
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"
+
 
 #####################################################################################

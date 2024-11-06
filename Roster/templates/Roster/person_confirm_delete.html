@@ -1,0 +1,38 @@
+{% extends 'roster_base.html' %}
+
+{% load django_bootstrap5 %}
+{% block bootstrap5_title %}Central Office [Roster]{%endblock%}
+
+
+
+{% block title %}
+    Welcome to the Roster App
+{% endblock %}
+
+
+{% block content %}
+<div class="row w-75">
+  {# Main list of people #}
+  <div class="col w-75">
+  {%block crud%}
+  <form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ person }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+  {%endblock%}
+  </div>
+
+  {# Control section #}
+  <div class="col col-lg-2">
+        {%block filter_block %}
+        {% if filter %}
+          Filters<p>
+            <form action="" method="get" class="form form-inline">
+              {% bootstrap_form filter.form layout='inline' %}
+              {% bootstrap_button 'Filter' %}
+            </form>
+        {%endif %}
+        {%endblock%}
+  </div>
+</div>
+{%endblock%}
