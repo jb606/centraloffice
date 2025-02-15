@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% block bootstrap5_title %}Central Office [Status]{%endblock%}
+
+
+
+{% block title %}
+    Welcome to the StatusBoard App
+{% endblock %}
+
+
+{% block content %}
+<div class="row w-75">
+  {# Main list of people #}
+  <div class="col w-75">
+  {%block crud%}
+  DATA HERE
+  {%endblock%}
+  </div>
+
+  {# Control section #}
+  <div class="col col-lg-2">
+        {%block filter_block %}
+        {% if filter %}
+          Filters<p>
+            <form action="" method="get" class="form form-inline">
+              {% bootstrap_form filter.form layout='inline' %}
+              {% bootstrap_button 'Filter' %}
+            </form>
+        {%endif %}
+        {%endblock%}
+  </div>
+</div>
+{%endblock%}

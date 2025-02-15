@@ -1,0 +1,22 @@
+{% extends "roster_base.html" %}
+{% load django_tables2 %}
+{% load django_bootstrap5 %}
+{%block title%}{%endblock%}
+
+
+
+  {%block crud%}
+
+    {% render_table table 'django_tables2/bootstrap5.html' %}
+    [<a href="{%url 'sb-group-create' %}">New Entry</a>]</p>
+  {%endblock%}
+  {%block filter_block%}
+  {% if filter %}
+          Filters<p>
+            <form action="" method="get" class="form form-inline">
+              {% bootstrap_form filter.form layout='inline' %}
+              {% bootstrap_button 'Filter' %}
+            </form>
+        {%endif %}
+  {%endblock%}
+

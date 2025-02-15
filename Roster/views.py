@@ -42,20 +42,4 @@ class PersonView(SingleTableMixin, FilterView):
 
 class UpdateTemplate(TemplateView):
     template_name = "Roster/person_form.html"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        person = get_object_or_404(get_user_model(),pk=self.kwargs['pk'])
-        context['person'] = person
-        context['form'] = forms.PersonForm(instance=person)
-        context['profile_form'] = forms.ProfileForm(instance=person.profile)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        pk = self.kwargs['pk']
-        person = get_object_or_404(get_user_model(), pk=pk)
-        person_form = forms.PersonForm(instance=person)
-        profile = get_object_or_404(models.Profile, person__pk=pk)
-        profile_form = forms.ProfileForm(instance=profile, data=request.POST)
-        if 'save_person' in request.POST:
-            if person_form.is_bound and person_form.is_valid():
-                person_form.save()
+    

@@ -8,4 +8,3 @@ class PersonAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Person, PersonAdmin)
 admin.site.register(models.Affiliation)
-admin.site.register(models.Profile)

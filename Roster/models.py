@@ -30,10 +30,3 @@ class Person(AbstractUser):
         verbose_name_plural = "People"
         verbose_name = "Person"
         db_table = "people"
-
-class Profile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    home_phone = models.CharField(max_length=16, null=True, blank=True)
-    mobile_phone = models.CharField(max_length=16, null=True, blank=True)
-    def __str__(self):
-        return self.user.username
