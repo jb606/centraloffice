@@ -1,0 +1,25 @@
+{% extends 'django_bootstrap5/bootstrap5.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% load django_htmx %}
+
+{% block bootstrap5_extra_head %}
+
+{% htmx_script %}
+{% endblock %}
+
+
+{% block bootstrap5_content %}
+<div class="container-fluid">
+{% block topnav%}
+  {% include 'titlebar.html' %}
+{%endblock%}
+{% block sidebar %}
+ {% include 'sidebar.html' %}
+{%endblock%}
+
+</div>
+
+
+
+{% endblock %}

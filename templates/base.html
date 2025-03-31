@@ -1,69 +1,51 @@
-{% extends 'django_bootstrap5/bootstrap5.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
+{% load django_htmx %}
+{% load i18n %}
 
-{% block bootstrap5_extra_head %}
+{% get_current_language as LANGUAGE_CODE %}
+{% bootstrap_setting "color_mode" as COLOR_MODE %}
+{% bootstrap_setting "javascript_in_head" as BOOTSTRAP_JAVASCRIPT_IN_HEAD %}
+<html lang="{{ LANGUAGE_CODE|default:'en_us' }}"{% if COLOR_MODE %} data-bs-theme="{{ COLOR_MODE }}"{% endif %}>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Page title -->
+    <title>{% block pagetitle %}template title{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Bootstrap JavaScript if it is in head -->
+    {% if BOOTSTRAP_JAVASCRIPT_IN_HEAD %}<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>{% endif %}
+    {% htmx_script %}
+  {% block head %}{% endblock %}
+</head>
 
-<script src="{% static 'htmx.min.js' %}" defer></script>
-{% endblock %}
+<body>
+{% block before_content %}{% endblock %}
+{% include "topbar.html" %}
+<div id="wrapper" class="row">
 
+  <div class="col-2">
+    {% include "sidebar.html" %}
+  </div>
 
-{% block bootstrap5_content %}
-{% block nav%}
-
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
-
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'person-list' %}" class="nav-link px-0 align-middle px-0">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Roster</span> 
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'sb-default' %}" class="nav-link px-0 align-middle px-0">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Status Board</span> 
-                        </a>
-                    </li>
-
-
-                </ul>
-                <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-
-                        <span class="d-none d-sm-inline mx-1">User</span>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow">
-
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <div class="col py-3">
-            <h1>{% block title %}(no title){% endblock %}</h1>
-            {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
-            {% block content %}(no content){% endblock %}
-        </div>
+  <div class="col">
+    <div class="continer-fluid">
+      {%block content %}CONTENT{%endblock%}
     </div>
+  </div>
 </div>
 
 
-{%endblock%}
 
 
 
+{% block after_content %}{% endblock %}
+<!-- Bootstrap JavaScript if it is in body -->
+{% if not BOOTSTRAP_JAVASCRIPT_IN_HEAD %}<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>{% endif %}
 
-{% endblock %}
+{% block extra_script %}{% endblock %}
+</body>
+
+</html>

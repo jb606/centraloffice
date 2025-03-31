@@ -17,3 +17,8 @@ class PeopleListTable(tables.Table):
             "actions",
         ]
     actions = TemplateColumn(template_name="Roster/list_actions.html")
+    def before_render(self, request):
+        if request.user.is_staff:
+            self.columns.show('actions')
+        else:
+            self.columns.hide('actions')

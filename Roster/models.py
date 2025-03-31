@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+
 # Create your models here.
 
 class Affiliation(models.Model):
@@ -24,8 +26,14 @@ class Person(AbstractUser):
                                  'unique': 'A user with that email address already exists',
                                              }
                             )
+    slug = models.SlugField(unique=True, blank=True)
     def __str__ (self):
         return(f"{self.first_name} {self.last_name}")
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super().save(*args, **kwargs)
+        
     class Meta:
         verbose_name_plural = "People"
         verbose_name = "Person"
