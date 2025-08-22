@@ -13,10 +13,12 @@ class PeopleListTable(tables.Table):
             "last_name",
             "first_name",
             "email",
-            "affiliation.name",
+            "affiliation__name",
             "actions",
         ]
+    
     actions = TemplateColumn(template_name="Roster/list_actions.html")
+    affiliation__name = tables.Column(verbose_name="Affiliation")
     def before_render(self, request):
         if request.user.is_staff:
             self.columns.show('actions')

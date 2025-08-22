@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load django_bootstrap5 %}
+{% load bootstrap_icons %}
 {% block bootstrap5_title %}Central Office [Roster]{%endblock%}
 
 
@@ -28,10 +29,11 @@
 {% block content %}
 <div class="row">
   {# Main list of people #}
-  <div class="col w-90">
+  <div class="col w-90" id="person_list" hx-target="this" hx-swap="innerHTML" hx-get="{% url "roster-load-people" %}" hx-trigger="load" >
   {%block crud%}
-  DATA HERE
+  
   {%endblock%}
+  <a href="{%url 'person-create' %}">{% bs_icon 'plus-lg' %}</a></p>
   </div>
 
   {# Control section #}

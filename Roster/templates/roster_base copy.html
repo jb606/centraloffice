@@ -35,6 +35,16 @@
   </div>
 
   {# Control section #}
-  
+  <div class="col-1">
+        {%block filter_block %}
+        {% if filter %}
+          Filters<p>
+            <form action="" method="get" class="form form-inline">
+              {% bootstrap_form filter.form layout='inline' %}
+              {% bootstrap_button 'Filter' %}
+            </form>
+        {%endif %}
+        {%endblock%}
+  </div>
 </div>
 {%endblock%}

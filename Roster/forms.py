@@ -33,7 +33,7 @@ class PersonForm(forms.ModelForm):
         ),
         FormActions(
             Submit('submit', 'Submit', css_class='btn btn-sm'),
-            HTML('<a href="{% url "person-list" %}" class="btn btn-sm btn-link">Cancel</a>'),
+            HTML('<a href="{% url "roster-home" %}" class="btn btn-sm btn-link">Cancel</a>'),
         )
     )
     helper = FormHelper()
